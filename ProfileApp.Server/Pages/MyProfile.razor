@@ -1,0 +1,96 @@
+﻿@page "/profile"
+@using ProfileApp.Server.Service.IService
+@using Models
+@inject IFileUpload FileUpload
+@inject IJSRuntime JsRuntime
+
+<div class="row mt-2 mb-5">
+    <h3 class="card-title text-primary">My Profile</h3>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <EditForm Model="profileDetails" OnValidSubmit="ValidateProfileDetails">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label>Name</label>
+                        <InputText @bind-Value="profileDetails.Name" class="form-control"></InputText>
+                        <ValidationMessage For="() => profileDetails.Name"></ValidationMessage>
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <InputNumber @bind-Value="profileDetails.Age" class="form-control"></InputNumber>
+                        <ValidationMessage For="() => profileDetails.Age"></ValidationMessage>
+                    </div>
+                    <div class="form-group">
+                        <InputFile OnChange="HandleImageUpload" multiple></InputFile>
+                        <div class="row">
+                            @if (profileDetails.ImageUrls!=null && profileDetails.ImageUrls.Count>0)
+                            {
+                                int serial = 1;
+                                foreach(var profileImage in profileDetails.ImageUrls)
+                                {
+                                <div class="col-md-2 mt-3">
+                                    <div class="profile-image" style="background: url(@profileImage) 50% 50%;"></div>
+                                    <span class="profile-image-title">@serial</span>
+                                </div>
+                                    serial++;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private ProfileDTO profileDetails { get; set; } = new ProfileDTO();
+    private ProfileImageDTO ProfileImage { get; set; } = new();
+
+    private string message = "Profile created successfully";
+
+    private async Task ValidateProfileDetails()
+    {
+        await JsRuntime.InvokeAsync<bool>("create", message);
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            var images = new List<string>();
+            if (e.GetMultipleFiles().Count > 0)
+            {
+                foreach(var file in e.GetMultipleFiles())
+                {
+                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(file.Name);
+                    if (fileInfo.Extension.ToLower() == ".jpg" ||
+                        fileInfo.Extension.ToLower() == ".png" ||
+                        fileInfo.Extension.ToLower() == ".jpeg")
+                    {
+                        var uploadedImagePath = await FileUpload.UploadFile(file);
+                        images.Add(uploadedImagePath);
+                    }
+                }
+                if (images.Any())
+                {
+                    if (profileDetails.ImageUrls != null && profileDetails.ImageUrls.Any())
+                    {
+                        profileDetails.ImageUrls.AddRange(images);
+                    }
+                    else
+                    {
+                        profileDetails.ImageUrls = new List<string>();
+                        profileDetails.ImageUrls.AddRange(images);
+                    }
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\DataAccess.deps.json
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\DataAccess.runtimeconfig.json
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\DataAccess.runtimeconfig.dev.json
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\DataAccess.dll
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\ref\DataAccess.dll
+E:\Blazor\ProfileApp\DataAccess\bin\Debug\net5.0\DataAccess.pdb
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfoInputs.cache
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfo.cs
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CoreCompileInputs.cache
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.dll
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.pdb
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.genruntimeconfig.cache
+E:\Blazor\ProfileApp\DataAccess\obj\Debug\net5.0\DataAccess.csproj.AssemblyReference.cache
